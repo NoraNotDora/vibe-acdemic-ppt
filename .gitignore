@@ -1,0 +1,5 @@
+# Ignore reference materials
+reference/
+
+# Ignore generated outputs
+output/
