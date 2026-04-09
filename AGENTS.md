@@ -8,10 +8,10 @@ You have access to several specific skills to assist in building the PPT. You **
 - **`tex-builder`**: Invoke this when you encounter TeX compilation errors, or when you need guidance on building the PDF in the `output/` directory.
 
 ## 2. End-to-End Workflow
-1. **Preparation**: Create a `reference/` folder for input materials (paper PDF, course requirements) and an `output/` folder for all generated code, figures, and PDFs.
+1. **Preparation**: Create a `reference/` folder for input materials (paper PDF, course requirements) and an `output/` folder for all generated code, figures, and PDFs. **MANDATORY**: Copy all contents from the provided `template/` directory (if any) into the `output/` folder to serve as the base for the presentation.
 2. Read the plan and invoke the `academic-ppt-planner` skill to complete requirement refinement based on materials in `reference/`.
 3. Generate a page-level outline from refined requirements.
-4. Draft `pre.tex` content and `pre.bib` references from the outline into the `output/` folder.
+4. Draft `pre.tex` content and `pre.bib` references from the outline into the `output/` folder by modifying the copied template files.
 5. Invoke the `tex-ppt-structuring` skill to organize figures and place them by narrative logic (e.g., `output/fig/`).
 6. Compile with XeLaTeX in the `output/` folder. If build fails, invoke the `tex-builder` skill.
 7. Generate a final, directly deliverable speech script.

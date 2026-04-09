@@ -33,3 +33,6 @@ xelatex -interaction=nonstopmode pre
 
 ## Personalization Rule
 If presentation requirements change (duration, focus, figure strategy, output format), append updates to the `presentation-personalizer` skill before regenerating outline and script.
+
+## Acknowledgements
+Special thanks to [SYSU-PRE](https://github.com/Lovely-XPP/SYSU-PRE) for providing the beautiful LaTeX Beamer template used for Sun Yat-Sen University (SYSU) academic presentations.
