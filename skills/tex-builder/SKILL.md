@@ -1,74 +1,48 @@
 ---
 name: "tex-builder"
-description: "Provides guidance and commands for building XeLaTeX projects. Invoke when encountering TeX compilation errors, building a PDF, or setting up the TeX environment."
+description: "Build and troubleshoot XeLaTeX academic PPTs in `output/`. Use when compilation fails, citations or fonts break, PATH or MiKTeX setup is missing, or you need the reliable build chain and layout-audit checklist."
 ---
 
-# TeX Setup and Build Notes
+# TeX Build and Troubleshooting Skill
 
-## 1. Environment Setup
-- Install MiKTeX.
-- Install Perl (required by `latexmk`).
+Use this skill when the slide TeX should compile, but the build is failing or needs a clean final pass.
 
-## 2. Required Executable Paths (Windows + MiKTeX)
-- Typical path: `C:\Users\<username>\AppData\Local\Programs\MiKTeX\miktex\bin\x64`
-- Must include at least:
-  - `xelatex.exe`
-  - `bibtex.exe`
-  - `latexmk.exe` (optional but recommended)
-  - `initexmf.exe`
+## When to Trigger
+- `xelatex` or `bibtex` is missing or not on PATH.
+- The PDF does not build, or citations and cross-references do not resolve.
+- Fonts, figures, or math look wrong in the compiled deck.
+- You need a reliable build checklist for `output/pre.tex`.
 
-## 3. First-Time Verification Commands
-```powershell
-where xelatex
-where bibtex
-where latexmk
-perl -v
-```
+## Build Assumptions
+- Work inside `output/`.
+- Use MiKTeX on Windows unless the repo says otherwise.
+- Keep the standard build chain unless the log tells you to stop earlier.
 
-If `where xelatex` returns nothing, temporarily prepend PATH:
-```powershell
-$env:Path="C:\Users\<username>\AppData\Local\Programs\MiKTeX\miktex\bin\x64;$env:Path"
-```
-
-## 4. Recommended Build Flow (XeLaTeX)
-Run in the PPT project directory:
-```powershell
-xelatex -interaction=nonstopmode pre
-bibtex pre
-xelatex -interaction=nonstopmode pre
-xelatex -interaction=nonstopmode pre
-```
+## Recommended Build Flow
+1. `xelatex -interaction=nonstopmode pre`
+2. `bibtex pre`
+3. `xelatex -interaction=nonstopmode pre`
+4. `xelatex -interaction=nonstopmode pre`
 
 Target output: `pre.pdf`
 
-## 5. Single-Command Build (Optional)
+## After the First Successful Compile
+- Inspect `pre.log` for `Overfull \hbox`, `Overfull \vbox`, unresolved references, and font warnings.
+- Run `python ..\tools\ppt_layout_audit.py --tex pre.tex --log pre.log`.
+- Treat layout warnings as fix-before-final issues.
+
+## Common Fixes
+- `where xelatex` returns nothing: refresh PATH or reopen the terminal.
+- MiKTeX log directory error: create `"$env:LOCALAPPDATA\MiKTeX\miktex\log"`.
+- Bibliography missing: verify `.bib` keys and rerun the full chain.
+- Output PDF locked: close the viewer or compile with a temporary job name.
+
+## Optional One-Command Build
 ```powershell
 latexmk -xelatex -synctex=1 -interaction=nonstopmode pre.tex
 ```
 
-## 6. Common Troubleshooting
-### 6.1 No output from `where xelatex`
-- Cause: PATH not refreshed or not set in user environment variables.
-- Fix:
-  1. Reopen terminal.
-  2. Temporarily prepend PATH (as above).
-  3. Add MiKTeX `bin` path in system/user environment settings if needed.
-
-### 6.2 MiKTeX update check warning
-- You can ignore it temporarily for basic builds.
-- Update packages later in MiKTeX Console.
-
-### 6.3 Log directory error (`log4cxx`)
-- Create the log directory, then retry:
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:LOCALAPPDATA\MiKTeX\miktex\log"
-```
-
-### 6.4 Bibliography not showing
-- Ensure `.bib` keys match `\cite{}` keys.
-- Run the full chain: `xelatex -> bibtex -> xelatex -> xelatex`.
-
-## 7. Minimum Acceptance Criteria
+## Minimum Acceptance Criteria
 - `pre.pdf` is generated successfully.
 - Agenda, content, and reference pages render correctly.
 - Fonts, figures, and formulas show no obvious errors.

@@ -1,60 +1,63 @@
 ---
 name: "tex-ppt-structuring"
-description: "Structures TeX academic slides and generates speech scripts. Invoke when handling figure integration, structuring presentations, or writing speech scripts."
+description: "Structure TeX academic slides, map paper figures to pages, and generate a directly deliverable speech script. Use when arranging figures, balancing slide density, or turning a drafted outline into Beamer slides."
 ---
 
-# TeX Academic PPT Structuring and Speech Script Skill (English Version)
+# TeX Academic PPT Structuring and Speech Script Skill
 
-## 1. Scope
-- Build or refine TeX-based academic slides (for example, `slides.tex`) with stable layout and clear narrative.
-- Handle common issues such as misaligned figures, duplicated caption numbering, unclear figure meaning, and crowded slide text.
-- Generate speech-ready scripts with strong logic, not rehearsal scripts.
+Use this skill after planning. It turns a paper outline into TeX slides that read clearly and compile cleanly.
 
-## 2. Folder and Naming Conventions
-- Figure folder: `fig/<topic>/`
-- Figure naming: `fig/<topic>/<fig-id>-<short-name>.pdf`
-- Prefer vector assets (PDF, or SVG converted to PDF); use PNG only when needed.
-- Keep legend files near their main figures, for example `*-legend.pdf`.
+## Scope
+- Build or refine TeX-based academic slides
+- Integrate figures, tables, and the minimum necessary math
+- Generate a speech-ready script
+- Fix layout imbalance, duplicate captions, and unreadable pages
 
-## 3. Figure Integration Workflow (Execution Order)
-1. Build a mapping table: `source figure id -> slide page -> speaking purpose`
-2. Choose layout first: single figure / side-by-side / figure + short takeaway
-3. Ensure alignment first, then tune size
-4. Write caption and speaking sentence
-5. Compile and check overflow, overlap, and numbering
-6. Normalize caption style across the deck
+## When to Trigger
+- The outline is ready and TeX drafting should start.
+- Figures need to be positioned by narrative logic.
+- A slide feels too dense, too empty, or visually unbalanced.
+- A direct speech script is needed from the approved slide order.
 
-## 4. Presentation Structuring Principles (Macro First)
-- Use the default storyline: **Motivation -> Method -> Evaluation -> Conclusion**.
-- Group strongly related pages before writing page-level scripts.
-- Typical grouped blocks:
-  - Motivation + problem definition
-  - System overview + module details
-  - Variable definition + objective + constraints
-  - Experiment setup + main results + ablation/robustness
-- Output macro outline first, then generate page-level speech script.
+## Macro Workflow
+1. Extract the section structure, key claims, and figure IDs from the paper or outline.
+2. Build a coverage table: `section title -> mapped slide pages -> covered? -> evidence(page/figure) -> concept explained?`.
+3. Build a figure map: `figure id -> meaning -> related section -> recommended placement -> takeaway sentence`.
+4. Decide the layout before editing text.
+   - Prefer one visual anchor per page.
+   - Keep 3-6 bullet points per page.
+   - Avoid more than 2 major figures on a page.
+   - Add a concept bridge slide or annotation when a term is likely unfamiliar.
+5. Assign a size budget before placing figures.
+   - Record the dominant visual, supporting text budget, and approximate width share.
+6. Write one plain-language explanation for each key formula or definition.
+7. Place figures in narrative order: background -> method -> evaluation -> conclusion.
+8. Compile, inspect the log, and simplify any page with overflow, unreadable figures, or dense text.
+9. Generate the final speech script from the approved page outline.
 
-## 5. Chapter Coverage Check (Section-by-Section)
-- Build a coverage table: `section title -> mapped slide pages -> covered? -> evidence(page/figure)`.
-- For each section, check at least:
-  - Core question is explained
-  - Key method/formula is present
-  - Key experimental finding is cited
-  - Transition to neighboring sections is clear
-- If something is missing, add evidence-first content before adding detail pages.
+## Concept Bridge
+- If a core term is central but unfamiliar, explain it before heavy use.
+- Prefer one short definition or bridge sentence over a long paragraph.
+- If the concept is important to the argument, make it visible in the outline instead of hiding it in a dense page.
 
-## 6. Figure Usage Strategy (Maximize Source Figure Coverage)
-- Goal: include as many source figures as reasonably possible.
-- Build a figure map: `figure id -> meaning -> related section -> recommended placement`.
-- Arrangement rules:
-  - Organize by figure-content relationship, not rigid source order
-  - Keep figures for one argument adjacent when possible
-  - Keep legends on the same or neighboring page as the main figure
-- Every key figure must have one explicit takeaway sentence.
+## Figure Rules
+- Use source figures whenever they support the argument directly.
+- If the original figure is unavailable, draw an equivalent diagram instead of forcing a weak substitution.
+- Put a short takeaway sentence immediately after each key figure.
+- Keep captions short and avoid manually repeating figure numbers if the template already numbers them.
 
-## 7. Reusable TeX Templates
+## Layout Audit
+After the first successful compile, run:
 
-### 7.1 Single-Figure Slide
+```powershell
+python ..\tools\ppt_layout_audit.py --tex pre.tex --log pre.log
+```
+
+Treat warnings as a cue to simplify, resize, or split the page before finalizing.
+
+## Useful TeX Patterns
+
+### Single-Figure Slide
 ```tex
 \begin{frame}{Topic Overview}
   \begin{figure}
@@ -65,7 +68,7 @@ description: "Structures TeX academic slides and generates speech scripts. Invok
 \end{frame}
 ```
 
-### 7.2 Side-by-Side Figures
+### Side-by-Side Figures
 ```tex
 \begin{frame}{Comparative View}
   \begin{columns}[T]
@@ -83,7 +86,7 @@ description: "Structures TeX academic slides and generates speech scripts. Invok
 \end{frame}
 ```
 
-### 7.3 Wide Figure That Looks Off-Center
+### Wide Figure That Looks Off-Center
 ```tex
 \begin{frame}{Process Overview}
   \centering
@@ -93,64 +96,27 @@ description: "Structures TeX academic slides and generates speech scripts. Invok
 \end{frame}
 ```
 
-## 8. Caption and Figure-Speaking Rules
+## Duration and Personalization Handling
+- If talk duration is unknown, ask before you finalize page count.
+- Short talk: keep storyline and key figures only.
+- Medium talk: storyline + key methods + main experiments.
+- Long talk: full coverage + extended discussion + Q&A prep.
+- Use `presentation-personalizer` when requirements change midstream.
 
-### 8.1 Caption Numbering Rule
-- If your template auto-generates “Figure X”, do not manually write “Figure X:” in `\caption{...}`.
-- Recommended: `\caption{Timeline gain in key stages}`
-- Not recommended: `\caption{Figure 3: Timeline gain in key stages}`
-
-### 8.2 Caption Information Structure
-- Pattern: **object + metric/dimension + usage**
-- Example: `Latency breakdown and sample proportion under different input scales (used for evaluation workload construction)`
-
-### 8.3 Figure-speaking Sentence Pattern
-- State conclusion first, then mechanism:
-  - `Conclusion: this figure shows XX. Mechanism: YY leads to ZZ.`
-
-## 9. Frequent Issues and Fixes
-- Not centered: use `\centering`; if still visually off, wrap with `\makebox[\linewidth][c]{...}`.
-- Distorted ratio: set only `width` or only `height`; if both are set, add `keepaspectratio`.
-- Duplicated numbering: remove manual “Figure X” from caption.
-- Unclear meaning: add variables and usage context in caption.
-- Overlap or crowding: reduce image width, add `\vspace`, shorten caption text.
-- Slow compile or memory pressure: compress oversized PNG files, prefer PDF.
-- Output PDF locked: compile to a temporary jobname first (for example `-jobname=slides_tmp`).
-
-## 10. Source TeX to Slide TeX (Figure Extraction by Appearance Order)
-- Inputs:
-  - Main file: `source.tex`
-  - Section files: `sections/*.tex`
-  - Figure directory: `fig/*.pdf`
-- Extraction:
-  - Read `\input{sections/...}` order from `source.tex`
-  - Extract `\includegraphics{fig/...}` line-by-line in each section file
-  - Deduplicate to get the figure appearance list
-- Landing:
-  - Copy source figures into `fig/topic`
-  - Place figures in `slides.tex` by speaking logic, not rigid source order
-  - Add one takeaway sentence per slide
-
-## 11. Duration and Personalization Handling
-- If talk duration is unknown, always ask first: `How many minutes is the presentation?`
-- Then adapt planning:
-  - Short: keep storyline and key figures only
-  - Medium: storyline + key methods + main experiments
-  - Long: full coverage + extended discussion + Q&A prep
-- Store custom requirements using the `presentation-personalizer` skill.
-- Invoke the `presentation-personalizer` skill to append new special requirements before regenerating outline and script.
-
-## 12. Output Requirements
+## Output Requirements
 - Do not produce rehearsal scripts.
 - Produce a directly deliverable speech script.
 - Always provide macro structure first, then page-level script.
+- Keep each page to 3-6 points, one sentence per point.
 
-## 13. Final Delivery Checklist
+## Final Delivery Checklist
 - All figures compile and paths are valid
 - All figures are visually centered and not stretched
 - Caption style is consistent and has no duplicated numbering
 - Every key figure has one takeaway sentence
 - Side-by-side pages have balanced spacing and font size
+- Uncommon core concepts are explained once in plain language
 - Storyline follows Motivation -> Method -> Evaluation -> Conclusion
 - Section-by-section coverage check is completed
 - Duration has been confirmed and script length matches it
+- Layout audit shows no critical overflow or imbalance warnings

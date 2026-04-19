@@ -1,94 +1,51 @@
 ---
 name: "academic-ppt-planner"
-description: "Helps plan and structure academic paper presentations. Invoke when starting a new academic PPT project, outlining slides, or refining presentation requirements."
+description: "Plan academic paper presentation slides from a paper PDF and course requirements. Use when starting a new academic PPT, refining slide requirements, mapping figures to pages, or turning a paper into a page-level outline before TeX drafting."
 ---
 
-# Academic PPT Plan Template (XeLaTeX)
+# Academic PPT Planner
 
-## 0. Project Info
-- Course / context:
-- Target paper:
-- Presentation duration:
-- Template path:
-- Target build directory:
+Use this skill to turn a paper and its constraints into a page-level presentation plan before anyone starts writing TeX.
 
-## 1. Input Materials
-- Paper PDF:
-- Course references / textbook chapters:
-- Existing outline (if any):
-- Figure sources (paper figures, experiment plots, flowcharts):
+## When to Trigger
+- The user is starting a new academic PPT.
+- The user wants slide pages outlined from a paper PDF or draft notes.
+- The user needs duration, audience, or page-budget decisions before slide writing.
+- The user asks how to map paper figures, sections, or claims into a presentation.
 
-## 2. Requirement Refinement (Do This First)
-### 2.1 Content Goals
-- Core problem to explain:
-- Key methods:
-- Key results:
-- Critical analysis:
+## Mandatory First Step
+Before you outline slides, always output:
+- Presentation goal in one sentence
+- Target audience
+- Duration and page constraints
+- Core paper contributions (3-5 items)
+- Must-cover figure list
+- Risk list (formula density, unreadable figures, page overflow)
 
-### 2.2 Style Goals
-- Tone: academic, objective, structured
-- Layout: visual-first with controlled page density
-- Math expression: consistent notation, readable formulas
+If duration or audience is missing, ask for it directly instead of guessing. The page budget and figure strategy depend on those constraints.
 
-### 2.3 Delivery Criteria
-- Target page count (recommended 14–20):
-- Time fit (expected speaking time per page):
-- Output files: `pre.tex`, `pre.bib`, `pre.pdf`
+## Inputs to Inspect
+- Paper PDF
+- Course requirements or instructor notes
+- Existing outline, if any
+- Extracted figure files
+- `skills/presentation_personalization_requirements.md`
+- `skills/ppt_plan_template.md`
 
-## 3. Page Structure Plan (Example)
-1. Title
-2. Agenda
-3. Background and problem definition
-4. Paper contributions
-5. Method overview
-6. Mathematical modeling
-7. Optimization formulation and solver
-8. Experiment setup
-9. Core results
-10. Result interpretation
-11. Limitations and improvement directions
-12. Conclusion
-13. References
-14. Q&A
+## Planning Workflow
+1. Read the paper structure, section titles, key claims, and figure IDs.
+2. Refine the requirements before drafting slides.
+3. Build the storyline as problem -> method -> result -> conclusion.
+4. Write a page-level outline with a page title, speaking goal, and one visual anchor for every page.
+5. Map each key figure to a page and write one sentence explaining why it belongs there.
+6. Identify unfamiliar terms early and mark where a concept-bridge slide or plain-language annotation is needed.
+7. Record the slide-level risks: formula density, unreadable figures, page overflow, or missing evidence.
+8. Draft the TeX skeleton and bibliography only after the outline is stable.
+9. Hand off to `tex-ppt-structuring` for figure placement and to `tex-builder` for compile troubleshooting.
 
-## 4. Figure-Text Strategy (Must Be Explicit)
-- At least one visual anchor per page (figure / flowchart / table).
-- Prioritize key paper figures in matching logical positions.
-- Figure naming convention: `fig/<section>/<figure-name>.<ext>`
-- Add 1–2 speaking points for each key figure.
-
-## 5. Implementation Steps
-### Phase A: Project Initialization
-- Copy template into target directory.
-- Verify `pre.tex / pre.bib / fig / cls` completeness.
-
-### Phase B: Content Drafting
-- Fill `pre.tex` by page structure.
-- Update `pre.bib`.
-- Insert key paper figures and captions.
-
-### Phase C: Build and Fix
-- Run XeLaTeX build chain.
-- Fix fonts, figure paths, citations, and overflow issues.
-
-### Phase D: Finalization
-- Check page density and transition smoothness.
-- Ensure timing fit at script level.
-- Freeze deliverable version.
-
-## 6. Build Commands
-```powershell
-xelatex -interaction=nonstopmode pre
-bibtex pre
-xelatex -interaction=nonstopmode pre
-xelatex -interaction=nonstopmode pre
-```
-
-## 7. Execution Checklist
-- [ ] Requirement refinement completed
-- [ ] Page-level outline completed
-- [ ] Figure resources collected
-- [ ] `pre.tex` content drafted
-- [ ] `pre.bib` updated
-- [ ] Build completed and `pre.pdf` generated
-- [ ] Final speech script aligned with target duration
+## Output Expectations
+- A requirement-refinement summary
+- A page-by-page outline
+- A figure-to-page map
+- A short risk list
+- A draft-ready TeX plan, not a final speech script
