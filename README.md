@@ -1,5 +1,7 @@
 # Vibe Academic PPT
 
+![demo](figure/demo.png)
+
 Vibe Academic PPT is a workspace for building academic paper presentation slides with TeX/Beamer.
 
 ## Repository Layout
