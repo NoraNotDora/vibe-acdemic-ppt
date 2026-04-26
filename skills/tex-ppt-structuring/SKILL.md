@@ -1,6 +1,6 @@
 ---
 name: "tex-ppt-structuring"
-description: "Structure TeX academic slides, map paper figures to pages, and generate a directly deliverable speech script. Use when arranging figures, balancing slide density, or turning a drafted outline into Beamer slides."
+description: "Structure TeX academic slides, map paper figures to pages, and generate a directly deliverable speech script. Use when arranging figures, balancing slide density, revising a page from the audience's point of view, or turning a drafted outline into Beamer slides."
 ---
 
 # TeX Academic PPT Structuring and Speech Script Skill
@@ -24,6 +24,7 @@ Use this skill after planning. It turns a paper outline into TeX slides that rea
 2. Build a coverage table: `section title -> mapped slide pages -> covered? -> evidence(page/figure) -> concept explained?`.
 3. Build a figure map: `figure id -> meaning -> related section -> recommended placement -> takeaway sentence`.
 4. Decide the layout before editing text.
+   - Read each page from the audience's point of view and ask whether the main message is clear on first pass.
    - Prefer one visual anchor per page.
    - Keep 3-6 bullet points per page.
    - Avoid more than 2 major figures on a page.
@@ -45,6 +46,12 @@ Use this skill after planning. It turns a paper outline into TeX slides that rea
 - If the original figure is unavailable, draw an equivalent diagram instead of forcing a weak substitution.
 - Put a short takeaway sentence immediately after each key figure.
 - Keep captions short and avoid manually repeating figure numbers if the template already numbers them.
+- Keep grouped figures together on the same page when they support one argument.
+- Place figures in the section where the related claim is introduced, not where they merely fit visually.
+- Match layout to aspect ratio and grouping:
+  - Use top-bottom layout for wide figures when that keeps the slide readable.
+  - Use left-right layout for tall figures when that keeps the slide readable.
+  - Keep paired or comparative figures adjacent so the audience can compare them without hunting across pages.
 
 ## Layout Audit
 After the first successful compile, run:
@@ -102,6 +109,7 @@ Treat warnings as a cue to simplify, resize, or split the page before finalizing
 - Medium talk: storyline + key methods + main experiments.
 - Long talk: full coverage + extended discussion + Q&A prep.
 - Use `presentation-personalizer` when requirements change midstream.
+- If the wording feels too dense for a live talk, simplify it before adjusting the layout again.
 
 ## Output Requirements
 - Do not produce rehearsal scripts.

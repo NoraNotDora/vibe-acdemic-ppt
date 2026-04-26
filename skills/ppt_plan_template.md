@@ -34,6 +34,12 @@
 - What the audience will not know:
 - Bridge sentences needed for unfamiliar terms:
 - Places where a dedicated concept slide is needed:
+- Confirmation order:
+  - Presentation goal
+  - Audience
+  - Duration and page budget
+  - Figure availability
+  - Storyline emphasis
 
 ### 2.3 Style Goals
 - Tone: academic, objective, structured
@@ -82,6 +88,8 @@
 - If a single figure occupies less than 35% or more than 85% of the page width without intent, revise the layout.
 - For side-by-side layouts, keep the visual weight balanced unless one side is clearly the primary figure.
 - Keep captions short enough to remain in one or two lines.
+- Read each page from the audience's point of view and check whether the main message is clear on first pass.
+- Match figure layout to aspect ratio and grouping, and keep related figures on the same page when possible.
 
 ### 5.2 Compile-Time Check
 - Run the XeLaTeX build chain.

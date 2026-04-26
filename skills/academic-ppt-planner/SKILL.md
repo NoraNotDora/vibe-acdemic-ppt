@@ -1,6 +1,6 @@
 ---
 name: "academic-ppt-planner"
-description: "Plan academic paper presentation slides from a paper PDF and course requirements. Use when starting a new academic PPT, refining slide requirements, mapping figures to pages, or turning a paper into a page-level outline before TeX drafting."
+description: "Plan academic paper presentation slides from a paper PDF and course requirements. Use whenever the user wants a paper turned into slides, needs a page-level outline, or asks how to map figures and claims into a talk before TeX drafting. Trigger this skill even if the user only says they need help making a paper presentation or slide plan."
 ---
 
 # Academic PPT Planner
@@ -24,6 +24,14 @@ Before you outline slides, always output:
 
 If duration or audience is missing, ask for it directly instead of guessing. The page budget and figure strategy depend on those constraints.
 
+## Confirmation Ladder
+Confirm requirements one step at a time before moving into outline writing.
+- Ask the smallest useful question first when a major constraint is missing.
+- Wait for the user's answer before locking the next stage.
+- Do not bundle audience, duration, figure strategy, and outline emphasis into one broad question unless the user explicitly asks for that.
+- Confirm the presentation goal, then audience, then duration, then page budget, then figure availability, then emphasis.
+- If the paper contains multiple possible storylines, show the options and ask which one to prioritize before drafting the outline.
+
 ## Inputs to Inspect
 - Paper PDF
 - Course requirements or instructor notes
@@ -35,13 +43,14 @@ If duration or audience is missing, ask for it directly instead of guessing. The
 ## Planning Workflow
 1. Read the paper structure, section titles, key claims, and figure IDs.
 2. Refine the requirements before drafting slides.
-3. Build the storyline as problem -> method -> result -> conclusion.
-4. Write a page-level outline with a page title, speaking goal, and one visual anchor for every page.
-5. Map each key figure to a page and write one sentence explaining why it belongs there.
-6. Identify unfamiliar terms early and mark where a concept-bridge slide or plain-language annotation is needed.
-7. Record the slide-level risks: formula density, unreadable figures, page overflow, or missing evidence.
-8. Draft the TeX skeleton and bibliography only after the outline is stable.
-9. Hand off to `tex-ppt-structuring` for figure placement and to `tex-builder` for compile troubleshooting.
+3. Pause for confirmation if a major decision is still ambiguous.
+4. Build the storyline as problem -> method -> result -> conclusion.
+5. Write a page-level outline with a page title, speaking goal, and one visual anchor for every page.
+6. Map each key figure to a page and write one sentence explaining why it belongs there.
+7. Identify unfamiliar terms early and mark where a concept-bridge slide or plain-language annotation is needed.
+8. Record the slide-level risks: formula density, unreadable figures, page overflow, or missing evidence.
+9. Draft the TeX skeleton and bibliography only after the outline is stable.
+10. Hand off to `tex-ppt-structuring` for figure placement and to `tex-builder` for compile troubleshooting.
 
 ## Output Expectations
 - A requirement-refinement summary

@@ -34,6 +34,8 @@
 - Before outlining, extract key concepts, jargon, abbreviations, and the paper's uncommon core terms.
 - For each uncommon core concept, write one plain-language explanation and decide whether it needs a dedicated slide.
 - Output macro outline first, then generate page-level speech script.
+- Read each page once as an audience member would.
+- If the page depends on oral explanation to make sense, simplify the text or add a clearer visual anchor.
 
 ### 4.1 Concept Bridge for Non-Specialist Audiences
 - Identify which concepts are new to a non-specialist audience.
@@ -58,6 +60,8 @@
   - Organize by figure-content relationship, not rigid source order
   - Keep figures for one argument adjacent when possible
   - Keep legends on the same or neighboring page as the main figure
+- Keep grouped figures together so the audience can compare them without switching pages.
+- Match layout to figure shape when it improves readability: wide figures can use top-bottom placement, and tall figures can use left-right placement.
 - Every key figure must have one explicit takeaway sentence and a size target.
 
 ## 7. Reusable TeX Templates
@@ -158,6 +162,7 @@
 - Do not produce rehearsal scripts.
 - Produce a directly deliverable speech script.
 - Always provide macro structure first, then page-level script.
+- Prefer natural, concise wording over stiff or overly segmented phrasing.
 
 ## 13. Final Delivery Checklist
 - All figures compile and paths are valid

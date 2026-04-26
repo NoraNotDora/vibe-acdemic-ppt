@@ -23,6 +23,7 @@ Vibe Academic PPT is a workspace for building academic paper presentation slides
 - [`skills/presentation-personalizer/SKILL.md`](skills/presentation-personalizer/SKILL.md): persistent presentation preferences
 - [`skills/tex-ppt-structuring/SKILL.md`](skills/tex-ppt-structuring/SKILL.md): slide structuring, figure placement, and speech scripts
 - [`skills/tex-builder/SKILL.md`](skills/tex-builder/SKILL.md): XeLaTeX build and troubleshooting
+- [`skills/natural-academic-language/SKILL.md`](skills/natural-academic-language/SKILL.md): natural academic wording and terminology choice
 - [`skills/README.md`](skills/README.md): index of the supporting markdown templates and notes
 
 ## Build Commands
@@ -38,6 +39,9 @@ python ..\tools\ppt_layout_audit.py --tex pre.tex --log pre.log
 
 ## Personalization Rule
 If presentation requirements change, update `skills/presentation_personalization_requirements.md` through the `presentation-personalizer` workflow before regenerating the outline or script.
+
+## Wording Rule
+If slide text or speaker notes sound too synthetic, use `natural-academic-language` to rewrite them before finalizing the deck.
 
 ## Acknowledgements
 Special thanks to [SYSU-PRE](https://github.com/Lovely-XPP/SYSU-PRE) for the LaTeX Beamer template used for Sun Yat-Sen University academic presentations.

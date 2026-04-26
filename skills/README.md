@@ -9,6 +9,7 @@ Canonical instructions live in each skill's `SKILL.md`. The top-level markdown f
 - `presentation-personalizer/`: maintain persistent presentation preferences and override history
 - `tex-ppt-structuring/`: arrange figures, balance slide density, and draft the deliverable speech script
 - `tex-builder/`: build and troubleshoot XeLaTeX slide decks in `output/`
+- `natural-academic-language/`: polish academic slide text, speaker notes, and translations to sound natural and concise
 
 ## Supporting Documents
 - `ppt_plan_template.md`: fill-in scaffold for requirement refinement and page planning
